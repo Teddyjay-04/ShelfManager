@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Return Book</title>
+</head>
+<body>
+    <h1>Return a Book</h1>
+    <form id="return-form">
+        <label for="transaction_id">Transaction ID:</label><br>
+        <input type="number" id="transaction_id" name="transaction_id" required><br><br>
+        <button type="submit">Return Book</button>
+    </form>
+
+    <script>
+        document.getElementById('return-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const transactionId = document.getElementById('transaction_id').value;
+
+            fetch(`/api/return/${transactionId}/`, {
+                method: 'POST'
+            })
+            .then(response => response.json())
+            .then(data => alert('Book returned successfully!'))
+            .catch(error => alert('Error returning book.'));
+        });
+    </script>
+</body>
+</html>
